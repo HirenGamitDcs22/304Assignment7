@@ -2,21 +2,21 @@ function Cart() {
     //state variable
   const Product=["Milk","Tea","Butter","Cheese","Maggie"]
   const Price=[100,30,120,220,200];
-  var Product_Qty=[0,0,0,0,0];
-  var [Quantity,Set_Quantity]=React.useState(Product_Qty);
-  var [Total_Quantity, Set_Total_Quantity]=React.useState(0);
+  var ProductQty=[0,0,0,0,0];
+  var [Qty,SetQty]=React.useState(ProductQty);
+  var [TotalQty, SetTotalQty]=React.useState(0);
     
-   var Calulate_Qty=()=>{
+   var CalulateQty=()=>{
      var total=0;
-     Quantity.forEach(q=> {
+     Qty.forEach(q=> {
        total +=q;
      });
      return total;
    };
    
-  var Calcluate_Amount = () => {
+  var CalcluateAmount = () => {
       var total = 0;
-      Quantity.forEach((q, index) => {
+      Qty.forEach((q, index) => {
         total += q * Price[index];
       });
   
@@ -24,11 +24,11 @@ function Cart() {
     };
     
    var AddToCart = index => {
-      Set_Quantity(Quantity.map((q, i) => i == index ? q + 1 : q));
+      SetQty(Qty.map((q, i) => i == index ? q + 1 : q));
     };
   
     function RemoveCart(index) {
-      Set_Quantity(Quantity.map((q, i) => i == index && q > 0 ? q - 1 : q));
+      SetQty(Qty.map((q, i) => i == index && q > 0 ? q - 1 : q));
     };
   
     return (
@@ -36,11 +36,11 @@ function Cart() {
       Product.map((nm, index) => 
       React.createElement("div", { key: index }, 
       React.createElement("h3", null, nm, " : ", Price[index], ", Qty: ",
-      Quantity[index]), 
+      Qty[index]), 
       React.createElement("button", { onClick: () => AddToCart(index) }, "Add"), 
       React.createElement("button", { onClick: () => RemoveCart(index) }, "Remove"))), 
   
-      React.createElement("h4", null, "Total Quantity :- ", Calulate_Qty()), 
-      React.createElement("h4", null, "Total Amount :- ", Calcluate_Amount())));
+      React.createElement("h4", null, "Total Quantity :- ", CalulateQty()), 
+      React.createElement("h4", null, "Total Amount :- ", CalcluateAmount())));
   };
   ReactDOM.render( <Cart/>, document.getElementById("root"));
